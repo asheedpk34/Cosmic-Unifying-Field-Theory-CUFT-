@@ -1,65 +1,4 @@
-#!/usr/bin/env python3
-"""
-GitHub Repository Setup Script for Cosmic Unifying Field Theory
-Automates the entire process of creating a professional GitHub repository
-"""
-
-import os
-import subprocess
-import sys
-from pathlib import Path
-
-def run_command(command, check=True):
-    """Run a shell command and return the result"""
-    try:
-        result = subprocess.run(command, shell=True, capture_output=True, text=True, check=check)
-        return result
-    except subprocess.CalledProcessError as e:
-        print(f"Error running command: {command}")
-        print(f"Error: {e}")
-        return None
-
-def check_prerequisites():
-    """Check if required tools are installed"""
-    print("🔍 Checking prerequisites...")
-    
-    # Check if git is installed
-    git_check = run_command("git --version", check=False)
-    if git_check and git_check.returncode == 0:
-        print("✅ Git is installed")
-    else:
-        print("❌ Git is not installed. Please install Git first.")
-        return False
-    
-    # Check if GitHub CLI is installed (optional but recommended)
-    gh_check = run_command("gh --version", check=False)
-    if gh_check and gh_check.returncode == 0:
-        print("✅ GitHub CLI is installed")
-        return True
-    else:
-        print("⚠️  GitHub CLI is not installed. Will use manual GitHub setup.")
-        return True
-
-def create_directory_structure(base_path):
-    """Create the complete directory structure"""
-    print("📁 Creating directory structure...")
-    
-    directories = [
-        "manuscript/figures",
-        "code", 
-        "data/processed",
-        "docs",
-        "tests"
-    ]
-    
-    for directory in directories:
-        dir_path = base_path / directory
-        dir_path.mkdir(parents=True, exist_ok=True)
-        print(f"  Created: {dir_path}")
-
-def create_readme(base_path):
-    """Create the comprehensive README.md file"""
-    readme_content = '''# Cosmic Unifying Field Theory (CUFT)
+# Cosmic Unifying Field Theory (CUFT)
 
 ![GitHub](https://img.shields.io/badge/license-MIT-blue.svg)
 ![GitHub](https://img.shields.io/badge/python-3.8%2B-brightgreen.svg)
@@ -97,7 +36,7 @@ CUFT extends standard cosmology through:
 ### Quick Start
 ```bash
 # Clone repository
-git clone https://github.com/{username}/cosmic-unifying-field-theory.git
+git clone https://github.com/your-username/cosmic-unifying-field-theory.git
 cd cosmic-unifying-field-theory
 
 # Install dependencies
